@@ -51,5 +51,25 @@
     {{-- @yield('content') --}}
     {{$slot}}
     </main>
+    <!--Footer container-->
+  <footer class="bg-black text-center text-white dark:bg-neutral-600">
+    <div class="container pt-8">
+      
+      {{-- <div class="justify-end"> --}}
+        <a href="http://localhost/larame/public/listings/create" class="justify-end text-yellow-300 right-2.5 bg-black border border-2 border-yellow-300 hover:bg-yellow-300 font-medium rounded-lg text-sm px-4 py-2 dark:border-yellow-300 dark:hover:bg-yellow-300 hover:text-black">Post a Job</a>
+      {{-- </div> --}}
+    </div>
+
+    <!--Copyright section-->
+    <div
+      class="bg-neutral-300 p-4 text-center text-neutral-700 dark:bg-neutral-700 dark:text-neutral-200">
+      © 2023 Copyright:
+      <a
+        class="text-neutral-800 dark:text-neutral-400"
+        href="https://tailwind-elements.com/"
+        >Larame</a
+      >
+    </div>
+  </footer>
 </body>
 </html>
