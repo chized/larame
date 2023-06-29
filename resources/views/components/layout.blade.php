@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Larame</title>
     <script>
@@ -52,12 +54,12 @@
     {{$slot}}
     </main>
     <!--Footer container-->
-  <footer class="bg-black text-center text-white dark:bg-neutral-600">
+{{--   <footer class="bg-black text-center text-white dark:bg-neutral-600">
     <div class="container pt-8">
-      
+
       {{-- <div class="justify-end"> --}}
         <a href="http://localhost/larame/public/listings/create" class="justify-end text-yellow-300 right-2.5 bg-black border border-2 border-yellow-300 hover:bg-yellow-300 font-medium rounded-lg text-sm px-4 py-2 dark:border-yellow-300 dark:hover:bg-yellow-300 hover:text-black">Post a Job</a>
-      {{-- </div> --}}
+      {{-- </div> --}
     </div>
 
     <!--Copyright section-->
@@ -70,6 +72,28 @@
         >Larame</a
       >
     </div>
+  </footer> --}}
+  <footer class="bg-gray-900 py-4">
+    <div class="container flex justify-between items-center">
+      <div class="flex justify-center items-center space-x-4">
+        <!-- Social Media Icons -->
+        <a href="#" class="text-gray-400 hover:text-gray-500 transition-colors duration-200">
+          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+            <!-- Replace with your social media icon SVG code -->
+          </svg>
+        </a>
+        <a href="#" class="text-gray-400 hover:text-gray-500 transition-colors duration-200">
+          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+            <!-- Replace with your social media icon SVG code -->
+          </svg>
+        </a>
+        <!-- Add more social media icons as needed -->
+      </div>
+      <button class="bg-yellow-500 text-gray-900 px-4 py-2 rounded-full hover:bg-yellow-600 hover:text-gray-100 transition-colors duration-200">
+        Create a Post
+      </button>
+    </div>
   </footer>
+  <x-flash-message />
 </body>
 </html>
