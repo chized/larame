@@ -9,11 +9,13 @@ class ListingController extends Controller
 {
     //To Show all listings
     public function index() {
-        //dd(request('tag'));
+        //dd(Listing::latest()->filter(request(['tag', 'search']))->paginate(2));
+
         return view('listings.index', [
-            // 'heading' => 'Latest Listings',
+            // 'heang' => 'Latest Listings',
              //'listings' => Listing::all()
-            'listings' => Listing::latest()->filter(request(['tag', 'search']))->get()
+             //'listings' => Listing::latest()->filter(request(['tag', 'search']))->simplePaginate(2)//This will use the Prev and Next buttons to Paginate
+            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(5)
          ]);
     }
 
@@ -32,7 +34,7 @@ class ListingController extends Controller
 
     //Store listing Data
     public function store(Request $request) {
-        //dd($request->all());
+        //dd($request->file('logo'));
         $formFields = $request->validate([
             'title' => 'required',
             'company' => ['required', Rule::unique('listings','company')],
@@ -43,6 +45,9 @@ class ListingController extends Controller
             'description' => 'required'
         ]);
 
+        if($request->hasFile('logo')) {
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public');
+        }
         Listing::create($formFields);
 
         return redirect('/')->with('message','Listing created succesfully');

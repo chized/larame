@@ -10,16 +10,16 @@
             <li class="w-full flex grid mb-4 flex-wrap items-center">
         <!--   <a href="larame/public/listings/{{$listing['id']}}">{{$listing['id']}}</a> -->
                        <div class="w-full block">
-                        <img class="h-auto max-w-full rounded-full" src="/larame/storage/app/public/web-icon.PNG" alt="">
-                       </div>                    
+                        <img class="h-auto max-w-full rounded-full" src="{{$listing->logo ? asset('storage/'.$listing->logo) : asset('../storage/app/public/web-icon.PNG')}}" alt="">
+                       </div>
 
                     <h2 class="w-full items-center  m-1 text-3xl font-bold"><a href="/larame/public/listings/{{$listing->id}}">{{$listing['title']}}</a> </h2>
-                    <h4 class="w-full  items-center m-1 text-xl">{{$listing->company}}</h4>                        
+                    <h4 class="w-full  items-center m-1 text-xl">{{$listing->company}}</h4>
                     <p class="w-full">
                             {{$listing['description']}}
                         </p>
                             <x-listing-tags :tagsCsv="$listing->tags" />
-                    
+
             </li>
     </ul>
 </x-card>
