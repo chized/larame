@@ -44,8 +44,24 @@
                 </a>
             </div>
             <div>
-                <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-amber border-amber hover:border-transparent hover:text-black-500 hover:bg-amber mt-4 lg:mt-0">Signup</a>
+                @auth
+                {{-- this is only displayed when the user is authenticated --}}
+                <a href="http://localhost/larame/public/register" class="text-sm px-4 py-2"><span>
+                    Welcome {{auth()->user()->name}}</span></a>
+                <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-amber border-amber hover:border-transparent hover:text-black-500 hover:bg-amber mt-4 lg:mt-0">Manage Listings</a>
+                <a href="" class="inline-block text-sm px-4 py-2 leading-none border rounded text-amber border-amber hover:border-transparent hover:text-black-500 hover:bg-amber mt-4 lg:mt-0">
+                    <form action="http://localhost/larame/public/logout" method="post" class="inline">
+                    @csrf
+                    <button type="submit" >
+                        <i class="fa-solid fa-door-closed">Logout</i>
+                    </button>
+                    </form>
+                </a>
+                @else
+                {{-- This is dispalayed when the user is NOT authenticated --}}
+                <a href="http://localhost/larame/public/register" class="inline-block text-sm px-4 py-2 leading-none border rounded text-amber border-amber hover:border-transparent hover:text-black-500 hover:bg-amber mt-4 lg:mt-0">Signup</a>
                 <a href="#" class="inline-block text-sm px-4 py-2 leading-none border rounded text-amber border-amber hover:border-transparent hover:text-black-500 hover:bg-amber mt-4 lg:mt-0">Login</a>
+                @endauth
             </div>
         </div>
     </nav>
