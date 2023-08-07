@@ -1,22 +1,20 @@
 @props(['listing'])
+
 <x-card>
-
-    <div class="grid grid-cols">
-
+    <div class="flex cols-span-2">
+      
+        <img class="hidden w-48 mr-6 md:block"
+        src="{{$listing->logo ? asset('storage/'.$listing->logo) : asset('../storage/app/public/web-icon.PNG')}}" alt="" />
         <div>
-            <div class="flex cols-span-2 items-center">
-                <div class="hidden lg:block w-1/4">
-                    <img class="h-auto max-w-full rounded-full" src="{{$listing->logo ? asset('storage/'.$listing->logo) : asset('../storage/app/public/web-icon.PNG')}}" alt="">
-                </div>
-                <div class="w-3/4">
-                    <h2 class="m-1 text-3xl font-bold"><a href="/larame/public/listings/{{$listing->id}}">{{$listing->title}}</a></h2>
-                    <p>{{$listing->description}}</p>
-                    <!-- tags for job posting -->
+                  <h3 class="text-2xl text-lg mt-4">
+                      <a href="http://localhost/larame/public/listings/{{$listing->id}}">{{$listing->title}}</a>
+                  </h3>
+                  <span class="text-xl font-bold mb-4">{{$listing->company}}</span>
                     <x-listing-tags :tagsCsv="$listing->tags" />
-                </div>
+                   
+                      <i class="fa-solid fa-location-dot"></i> {{$listing->location}}
+                  
             </div>
-        </div>
-
-    </div>
+          </div>
 
 </x-card>

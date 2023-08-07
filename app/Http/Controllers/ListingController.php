@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Listing;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -48,6 +49,9 @@ class ListingController extends Controller
         if($request->hasFile('logo')) {
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
+
+        $formFields['user_id'] = auth()->id();
+
         Listing::create($formFields);
 
         return redirect('/')->with('message','Listing created succesfully');
@@ -62,6 +66,10 @@ class ListingController extends Controller
     //Store listing Data
     public function update(Request $request, Listing $listing) {
         //dd($request->file('logo'));
+        //Restrict unathorized access
+        if($listing->user_id != auth()->id()) {
+            abort(403, 'Unauthorized Action');
+        }
         $formFields = $request->validate([
             'title' => 'required',
             'company' => ['required'],
@@ -80,9 +88,21 @@ class ListingController extends Controller
         return back()->with('message','Listing updated succesfully');
     }
 
+    //Delete job posting
     public function destroy(Listing $listing) {
+         //Restrict unathorized access
+         if($listing->user_id != auth()->id()) {
+            abort(403, 'Unauthorized Action');
+        }
         $listing->delete();
         return redirect('/')->with('message', 'Listing Deleted Successfully');
     }
+    //Manage Listings
+    public function manage() {
+        $user = User::find(auth()->id());
+        return view('listings.manage', ['listings' => $user->listings()->get()]);
 
+
+        //return view('listings.manage', ['Listings' => auth()->user()->listings()->get()]); //This worked from traversy, but I'll use what I got from a forum
+    }
 }
